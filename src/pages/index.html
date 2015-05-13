@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <title>Angular Form Demo</title>
+    </head>
+
+    <body ng-app="app">
+        <header class="primary-header">
+            <h1>Angular Form Demo</h1>
+        </header>
+
+        <main class="content">
+            <section class="primary-content" ng-controller="formController as demoForm">
+                <form name="contactForm" novalidate>
+                    <div class="form-row">
+                        <label for="first-name">First Name</label>
+                        <input id="first-name" name="firstName" type="text" ng-model="demoForm.data.firstName" required />
+                        <p class="form-error" ng-show="contactForm.firstName.$invalid && (contactForm.firstName.$dirty || demoForm.formSubmitted)">Please enter your first name</p>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="surname">Surname</label>
+                        <input id="surname" name="surname" type="text" ng-model="demoForm.data.surname" required />
+                        <p class="form-error" ng-show="contactForm.surname.$invalid && (contactForm.surname.$dirty || demoForm.formSubmitted)">Please enter your surname</p>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" ng-model="demoForm.data.email" required />
+                        <p class="form-error" ng-show="contactForm.email.$error.required && (contactForm.email.$dirty || demoForm.formSubmitted)">Please enter your email address</p>
+                        <p class="form-error" ng-show="contactForm.email.$error.email && (contactForm.email.$dirty || demoForm.formSubmitted)">Please enter a valid email address</p>
+                    </div>
+
+                    <button type="submit" ng-click="demoForm.submit(contactForm.$valid)">Submit</button>
+                </form>
+            </section>
+
+            <section class="secondary-content" ng-controller="resultsController as results">
+                <dl>
+                    <dt>Name:</dt>
+                    <dd>{{results.form.formData.firstName}} {{results.form.formData.surname}}</dd>
+
+                    <dt>Email:</dt>
+                    <dd>{{results.form.formData.email}}</dd>
+                </dl>
+            </section>
+        </main>
+
+        <script src="/js/scripts.js"></script>
+    </body>
+</html>
